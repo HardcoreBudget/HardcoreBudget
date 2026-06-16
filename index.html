@@ -397,7 +397,10 @@
       <!-- Interactive 3D Model Viewer Container -->
       <div id="modal-3d-container" class="relative flex-grow flex items-center justify-center overflow-hidden min-h-[300px] h-[55vh]">
         <!-- GLB/GLTF Viewer -->
-        <model-viewer id="modal-3d-viewer" src="" camera-controls auto-rotate shadow-intensity="1" class="w-full h-full bg-surface-container-low border-2 border-surface-border rounded-lg" ar ar-modes="webxr scene-viewer quick-look"></model-viewer>
+        <div id="glb-loading-indicator" class="absolute inset-0 flex flex-col items-center justify-center bg-surface-container-low border-2 border-surface-border rounded-lg text-text-secondary font-mono text-sm gap-3 z-10 hidden">
+          <span class="material-symbols-outlined text-4xl animate-spin text-primary">autorenew</span>
+          <span>Loading 3D Model...</span>
+        </div>
         <!-- FBX Canvas Viewer -->
         <div id="modal-fbx-viewer" class="w-full h-full bg-surface-container-low border-2 border-surface-border rounded-lg hidden relative"></div>
       </div>

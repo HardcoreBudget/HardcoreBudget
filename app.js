@@ -4,6 +4,7 @@ let activeModelFilter = 'All';
 let currentRenders = [];
 let currentRenderIndex = 0;
 let currentExportedModel = '';
+let loadedModels = {};
 
 // Three.js FBX Viewer State
 let fbxScene = null;
@@ -73,6 +74,8 @@ function setupEventListeners() {
   
   const tabRenders = document.getElementById('tab-renders');
   if (tabRenders) tabRenders.addEventListener('click', () => switchModalTab('renders'));
+
+
   
   // Click outside lightbox to close
   const modalContainer = document.getElementById('renders-modal');
@@ -807,11 +810,91 @@ function closeLightbox() {
   const modal = document.getElementById('renders-modal');
   if (modal) modal.classList.add('hidden');
   
-  // Unload 3D model to save memory and performance
-  const viewer = document.getElementById('modal-3d-viewer');
-  if (viewer) viewer.removeAttribute('src');
-  
+  destroyGlbViewer();
   destroyFbxViewer();
+}
+
+function loadGlbModel(url) {
+  // If the model-viewer script/custom-element is not loaded or registered yet, wait for it
+  if (!customElements.get('model-viewer')) {
+    const loader = document.getElementById('glb-loading-indicator');
+    if (loader) {
+      loader.classList.remove('hidden');
+      const loaderText = loader.querySelector('span:last-child');
+      if (loaderText) loaderText.textContent = 'Initializing 3D Engine...';
+    }
+    customElements.whenDefined('model-viewer').then(() => {
+      // Re-load the model once the library is defined
+      loadGlbModel(url);
+    });
+    return;
+  }
+
+  destroyGlbViewer();
+  
+  const container = document.getElementById('modal-3d-container');
+  if (!container) return;
+  
+  const loader = document.getElementById('glb-loading-indicator');
+  const cachedUrl = loadedModels[url];
+  const isAlreadyLoaded = !!cachedUrl;
+
+  if (loader) {
+    if (isAlreadyLoaded) {
+      loader.classList.add('hidden');
+    } else {
+      loader.classList.remove('hidden');
+      const loaderText = loader.querySelector('span:last-child');
+      if (loaderText) loaderText.textContent = 'Loading 3D Model...';
+    }
+  }
+  
+  const newViewer = document.createElement('model-viewer');
+  newViewer.id = 'modal-3d-viewer';
+  newViewer.setAttribute('camera-controls', '');
+  newViewer.setAttribute('auto-rotate', '');
+  newViewer.setAttribute('shadow-intensity', '1');
+  newViewer.className = 'w-full h-full bg-surface-container-low border-2 border-surface-border rounded-lg';
+  newViewer.setAttribute('ar', '');
+  newViewer.setAttribute('ar-modes', 'webxr scene-viewer quick-look');
+  
+  newViewer.addEventListener('load', () => {
+    // Save the exact cache-busted URL that loaded successfully
+    loadedModels[url] = newViewer.src;
+    if (loader) loader.classList.add('hidden');
+  });
+  
+  newViewer.addEventListener('progress', (event) => {
+    const loaderText = document.querySelector('#glb-loading-indicator span:last-child');
+    if (loaderText && typeof event.detail.totalProgress === 'number') {
+      const percent = Math.round(event.detail.totalProgress * 100);
+      loaderText.textContent = `Streaming model: ${percent}%`;
+    }
+  });
+  
+  const fbxContainer = document.getElementById('modal-fbx-viewer');
+  container.insertBefore(newViewer, fbxContainer);
+
+  if (isAlreadyLoaded) {
+    newViewer.src = cachedUrl;
+  } else {
+    const cacheBuster = url.includes('?') ? '&' : '?';
+    newViewer.src = url + cacheBuster + 't=' + Date.now();
+  }
+}
+
+function destroyGlbViewer() {
+  const viewer = document.getElementById('modal-3d-viewer');
+  if (viewer) {
+    viewer.removeAttribute('src');
+    if (viewer.parentNode) {
+      viewer.parentNode.removeChild(viewer);
+    }
+  }
+  const loader = document.getElementById('glb-loading-indicator');
+  if (loader) {
+    loader.classList.add('hidden');
+  }
 }
 
 function switchModalTab(tab) {
@@ -820,7 +903,6 @@ function switchModalTab(tab) {
   const container3d = document.getElementById('modal-3d-container');
   const containerRenders = document.getElementById('modal-renders-container');
   const indicators = document.getElementById('modal-indicators');
-  const viewer = document.getElementById('modal-3d-viewer');
   const fbxContainer = document.getElementById('modal-fbx-viewer');
   
   const isFbx = currentExportedModel && currentExportedModel.toLowerCase().endsWith('.fbx');
@@ -841,19 +923,17 @@ function switchModalTab(tab) {
     if (currentExportedModel) {
       if (isFbx) {
         if (fbxContainer) fbxContainer.classList.remove('hidden');
-        if (viewer) {
-          viewer.removeAttribute('src');
-          viewer.classList.add('hidden');
-        }
+        destroyGlbViewer();
         // Only initialize if not already running
         if (!fbxScene) {
           initFbxViewer(currentExportedModel);
         }
       } else {
         if (fbxContainer) fbxContainer.classList.add('hidden');
-        if (viewer) {
-          viewer.src = currentExportedModel;
-          viewer.classList.remove('hidden');
+        // Only load GLB if it's not already loaded in the DOM
+        const existingViewer = document.getElementById('modal-3d-viewer');
+        if (!existingViewer) {
+          loadGlbModel(currentExportedModel);
         }
       }
     }
@@ -872,14 +952,13 @@ function switchModalTab(tab) {
       tabRenders.className = 'px-4 py-2 bg-primary text-white border-2 border-primary rounded-lg font-display text-xs font-bold transition-all nintendo-shadow btn-press';
     }
 
-    // Stop/unload 3D view to save memory and performance
-    destroyFbxViewer();
-    if (viewer) {
-      viewer.removeAttribute('src');
-      viewer.classList.add('hidden');
-    }
-    if (fbxContainer) {
-      fbxContainer.classList.add('hidden');
+    // Do NOT destroy GLB viewer here, to keep it loaded when switching back.
+    // Clean up FBX to save performance since it uses canvas animation loop.
+    if (isFbx) {
+      destroyFbxViewer();
+      if (fbxContainer) {
+        fbxContainer.classList.add('hidden');
+      }
     }
   }
 }
