@@ -16,7 +16,6 @@ Thumbs.db
 
 # Large binaries, media, and docs (stored in GitHub Releases)
 *.blend
-*.glb
 *.apk
 *.png
 *.jpg
