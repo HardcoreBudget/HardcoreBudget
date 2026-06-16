@@ -1,0 +1,143 @@
+{
+  "profile": {
+    "name": "Hazim Emad Ismail",
+    "title": "Unity Game Developer and Software Engineer",
+    "level": "Creative Start",
+    "bio": "I build interactive experiences and 3D assets that are joyfully fun. Welcome to my digital workshop, inspired by the chunky, vibrant aesthetics of classic handheld gaming.",
+    "avatar": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/HardcoreBudget.png",
+    "contactImage": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/profile_pic.png",
+    "resumeGameDev": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/resume_gamedev.pdf",
+    "resumeAI": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/resume_ai.pdf",
+    "email": "hazimemad01@gmail.com",
+    "socials": {
+      "github": "https://github.com/HardcoreBudget",
+      "itchio": "https://hardcore-budget.itch.io",
+      "linkedin": "https://www.linkedin.com/in/hazim-emad/",
+      "playstore": "https://play.google.com/store/apps/developer?id=Hardcore+Budget"
+    }
+  },
+  "models": [
+    {
+      "id": "donut_tutorial",
+      "title": "Donut",
+      "description": "A beginner-friendly 3D model of a donut, following the popular Blender Guru tutorial. Perfect for learning the basics of 3D modeling, texturing, and rendering.",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/Donut.png",
+      "tags": ["Game Ready"],
+      "modelFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/tutorial_donut.blend",
+      "exported3dmodel": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/tutorial_donut.glb",
+      "renders": [
+        "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/Donut.png"
+      ]
+    },
+    {
+      "id": "iono_logo",
+      "title": "Iono Logo",
+      "description": "An futuristic neon logo with 3d effects",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/iono_logo.png",
+      "tags": ["Logo"],
+      "modelFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/iono_logo.blend",
+      "exported3dmodel": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/iono_logo.glb",
+      "renders": [
+        "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/iono_logo.png"
+      ]
+    },
+    {
+      "id": "papaya_lipstick",
+      "title": "Papaya Lipstick",
+      "description": "A simple lipstick model from a brand called Papaya.",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/papaya_lipstick.png",
+      "tags": ["Game Ready"],
+      "modelFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/papaya5_lipstick_80.blend",
+      "exported3dmodel": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/papaya_lipstick.glb",
+      "renders": [
+        "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/papaya_lipstick.png"
+      ]
+    }
+  ],
+  "games": [
+    
+    {
+      "id": "mind_bind",
+      "title": "Mind Bind",
+      "description": "Mind bind is a puzzle-platformer game about helping a pirate and his sidekick get to the treasure. Both characters move and jump together. Your goal is to find a way to bind both characters while maneuvering through some difficult and mind bending platforming sections to reach a chest. Can you beat all 20 levels? ",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/Banner_With_Title.png",
+      "icon": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/mind_bind_icon.png",
+      "tags": ["Unity", "2D"],
+      "engine": "Unity",
+      "platform": "Android",
+      "status": "Released",
+      "role": "Game Developer",
+      "playStoreLink": "https://play.google.com/store/apps/details?id=com.HardcoreBudget.MindBind",
+      "apkFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/MindBind.apk",
+      "webDemoLink": "https://hardcore-budget.itch.io/mind-bind",
+      "trailerLink": "https://www.youtube.com/watch?v=9_c2wRjhi4E",
+      "assetStoreLink": ""
+    },
+    {
+      "id": "bounce",
+      "title": "Bounce",
+      "description": "Bounce is a game about a ball that constantly bounces. Your mission is simple avoid any obstacles and climb as high as possible. You can collect power-ups and coins along the way. Power-ups will assist you in gaining score or coins. Coins can be used to buy different ball skins from the shop which have their own trails. Going faster between platforms will fill up a meter on the right which boosts you for a limited time. ",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/bounce_banner.png",
+      "icon": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/bounce_icon.png",
+      "tags": ["Unity", "2D"],
+      "engine": "Unity",
+      "platform": "Android",
+      "status": "Released",
+      "role": "Game Developer",
+      "playStoreLink": "https://play.google.com/store/apps/details?id=com.HardcoreBudget.Bounce",
+      "apkFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/Bounce.apk",
+      "webDemoLink": "",
+      "trailerLink": "https://www.youtube.com/watch?v=vsGzdtKNjNk",
+      "assetStoreLink": ""
+    },
+    {
+      "id": "swinging_rope",
+      "title": "Swinging Rope 2D",
+      "description": "Swinging rope is a game about a ball that constantly swings on a rope. Your mission is simple avoid any obstacles and climb as high as possible. You can collect power-ups and coins along the way. Power-ups will assist you in gaining score or coins. Coins can be used to buy different ball skins from the shop which have their own trails. Going faster between platforms will fill up a meter on the right which boosts you for a limited time. ",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/swinging_rope_banner.webp",
+      "icon": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/v1.0.0/swinging_rope_icon.png",
+      "tags": ["Unity", "2D"],
+      "engine": "Unity",
+      "platform": "Unity",
+      "status": "Released",
+      "role": "Game Developer",
+      "playStoreLink": "",
+      "apkFile": "",
+      "webDemoLink": "",
+      "trailerLink": "https://www.youtube.com/watch?v=ooXMHpnZCrw&t=19s",
+      "assetStoreLink": "https://assetstore.unity.com/packages/2d/swinging-rope-2d-189679"
+    }
+  ],
+  "miscProjects": [
+    {
+      "id": "PIC_programmer",
+      "title": "PIC Programmer",
+      "description": "A customly designed PIC PCB that costs around 50EGP for the parts instead of paying 10x for the programming kit.",
+      "tags": ["Embedded Systems"],
+      "icon": "developer_board",
+      "link": "https://easyeda.com/editor#project_id=a080685a59e64dcdb72545d475e10d84"
+    },
+    {
+      "id": "pov_clock",
+      "title": "Persistence Of Vision (POV) Clock",
+      "description": "A single line strip of small LED lights that rotate around a motor to display a clock and trick your mind into believing that it's actually a full circle",
+      "tags": ["Embedded Systems"],
+      "icon": "psychology",
+      "link": "https://github.com/HardcoreBudget/POV_Clock"
+    },
+    {
+      "id": "video_analytics",
+      "title": "Video Analytics",
+      "description": "A full on system that manages RTSP cameras, processes services, and integrates with external/internal VMS system. You can then search based on events, attributes, etc... , It even has an AI chat bot features for custom events that might've occurred but are not predefined.",
+      "tags": ["AI"],
+      "icon": "smart_toy",
+      "link": ""
+    }
+  ],
+  "buildingProject": {
+    "title": "Currently Building...",
+    "description": "Working on a custom mappable physical controller for Android and PC that can be used as a mouse, keyboard, gamepad, and touchscreen controller. I've built the mapping software from scratch using Unity for both operating systems and currently working on the PCB and mechanical design. It is planned to be the same shape as telescopic controllers for mobile phones with some extensions to make it look like a normal controller for PC. You can map each button to whatever input you want  (e.g., X could press a location on the screen, Square could be a keyboard press, Analog sticks could control the mouse cursor, etc.). It supports both wired and Bluetooth connectivity. This all happens on the hardware level using HID, so the mapping software does not need to run in the background for the controller to function, saving battery life. I've always wanted a controller that could be used for everything, but there's nothing like it on the market, so I decided to make my own.",
+    "progress": 80,
+    "progressLabel": "Contr@llers - 80%"
+  }
+}

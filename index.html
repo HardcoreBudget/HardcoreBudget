@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Hazim Emad Portfolio</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+  
+  <!-- Google Model Viewer component CDN -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+  
+  <!-- Three.js & FBX Loader CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Tailwind Configuration Mapping to CSS Variables -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "var(--background)",
+            "on-background": "var(--on-background)",
+            primary: "var(--primary)",
+            "primary-hover": "var(--primary-hover)",
+            secondary: "var(--secondary)",
+            surface: "var(--surface)",
+            "surface-container": "var(--surface-container)",
+            "surface-container-low": "var(--surface-container-low)",
+            "surface-container-high": "var(--surface-container-high)",
+            "text-secondary": "var(--text-secondary)",
+            tertiary: "var(--tertiary)",
+            "tertiary-container": "var(--tertiary-container)",
+            "on-tertiary-container": "var(--on-tertiary-container)",
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          spacing: {
+            lg: "40px",
+            base: "8px",
+            xs: "4px",
+            sm: "12px",
+            gutter: "24px",
+            margin: "32px",
+            xl: "64px",
+            md: "24px"
+          },
+          fontFamily: {
+            display: ["Sora", "sans-serif"],
+            body: ["Plus Jakarta Sans", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body pb-16 md:pb-0">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky bg-surface/80 dark:bg-surface/80 backdrop-blur-md font-display docked full-width top-0 border-b-2 border-surface-container-high shadow-[0_4px_10px_rgba(0,0,0,0.02)] z-50 transition-colors">
+    <div class="flex justify-between items-center w-full px-margin py-4 max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-md">
+        <a id="nav-logo" class="font-display text-headline-md font-extrabold text-primary tracking-tighter hover:scale-95 transition-transform uppercase cursor-pointer" href="#home">
+          ARTIST_CORE
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex gap-margin items-center">
+        <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#home">Home</a>
+        <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#models">Models</a>
+        <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#games">Games</a>
+        <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#misc">Misc</a>
+      </nav>
+      
+      <!-- Action Controls -->
+      <div class="flex items-center gap-md">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-surface-container-high transition-colors flex items-center justify-center text-secondary hover:text-primary" aria-label="Toggle Theme">
+          <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+        </button>
+        
+        <!-- Contact CTA Button -->
+        <a href="#contact" class="hidden md:block btn-tactile bg-primary text-white font-semibold py-2 px-6 rounded-full transition-all uppercase tracking-wider text-sm">
+          Contact
+        </a>
+        
+        <!-- Profile Shortcut -->
+        <a href="#contact" class="w-10 h-10 rounded-full border-2 border-surface-container-high overflow-hidden hover:border-primary transition-colors flex items-center justify-center bg-surface-container">
+          <img id="nav-avatar" alt="Avatar" class="w-full h-full object-cover hidden"/>
+          <span id="nav-avatar-placeholder" class="material-symbols-outlined text-[32px] text-secondary">account_circle</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Views Container -->
+  <main class="flex-grow">
+    
+    <!-- ==================== HOME VIEW ==================== -->
+    <section id="home" class="view-section active">
+      <!-- Hero Header -->
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col items-center justify-center text-center min-h-[500px]">
+        <div id="hero-badge" class="inline-flex items-center gap-2 bg-surface-container text-primary px-4 py-1.5 rounded-full font-semibold text-xs mb-md border-2 border-surface-container-high shadow-sm uppercase tracking-wider">
+          <span class="material-symbols-outlined text-sm font-bold">stadia_controller</span>
+          <span id="hero-level">Level 1: Creative Start</span>
+        </div>
+        <h1 id="hero-title" class="font-display text-4xl md:text-6xl mb-md max-w-4xl font-extrabold leading-tight tracking-tight">
+          Crafting Playful Worlds & Tactile Models.
+        </h1>
+        <p id="hero-bio" class="font-body text-base md:text-lg text-text-secondary max-w-2xl mb-lg leading-relaxed">
+          I build interactive experiences and 3D assets that feel physically real and joyfully fun. Welcome to my digital workshop, inspired by the chunky, vibrant aesthetics of classic handheld gaming.
+        </p>
+        <div class="flex flex-wrap gap-md justify-center">
+          <a href="#games" class="btn-tactile bg-primary text-white font-semibold py-3 px-8 rounded-full uppercase tracking-wider text-sm flex items-center gap-2">
+            <span class="material-symbols-outlined">sports_esports</span> Start Playing
+          </a>
+          <a id="hero-resume-gamedev" href="#" target="_blank" class="btn-tactile-secondary bg-surface text-on-background font-semibold py-3 px-8 rounded-full flex items-center gap-2 uppercase tracking-wider text-sm border-2 border-secondary">
+            <span class="material-symbols-outlined">download</span> CV (Game Dev)
+          </a>
+          <a id="hero-resume-ai" href="#" target="_blank" class="btn-tactile-secondary bg-surface text-on-background font-semibold py-3 px-8 rounded-full flex items-center gap-2 uppercase tracking-wider text-sm border-2 border-secondary">
+            <span class="material-symbols-outlined">download</span> CV (AI)
+          </a>
+        </div>
+      </div>
+
+      <!-- Models Teaser -->
+      <div class="border-t-2 border-surface-container-high bg-surface-container-low/40">
+        <div class="max-w-[1440px] mx-auto px-margin py-xl">
+          <div class="flex justify-between items-end mb-lg">
+            <div>
+              <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-1">Featured Models</h2>
+              <p class="text-text-secondary text-sm md:text-base font-medium">Tactile, chunky, and ready for action.</p>
+            </div>
+            <a href="#models" class="btn-tactile-secondary bg-surface text-on-background font-bold py-2 px-6 rounded-full items-center gap-2 uppercase text-xs tracking-wider border-2 border-secondary flex">
+              View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+          <div id="models-teaser-grid" class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Games Teaser -->
+      <div class="border-t-2 border-surface-container-high bg-surface-container-low">
+        <div class="max-w-[1440px] mx-auto px-margin py-xl">
+          <div class="flex justify-between items-end mb-lg">
+            <div>
+              <h2 class="font-display text-2xl md:text-3xl font-extrabold mb-1">Playable Worlds</h2>
+              <p class="text-text-secondary text-sm md:text-base font-medium">Interactive experiences built for joy.</p>
+            </div>
+            <a href="#games" class="btn-tactile-secondary bg-surface text-on-background font-bold py-2 px-6 rounded-full items-center gap-2 uppercase text-xs tracking-wider border-2 border-secondary flex">
+              View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+          <div id="games-teaser-grid" class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Currently Building Progress Section -->
+      <div class="border-t-2 border-surface-container-high bg-surface-container-low/50">
+        <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col items-center justify-center">
+          <div class="card-tactile p-8 flex flex-col justify-center items-center text-center bg-surface-container border-dashed border-4 border-surface-border max-w-2xl w-full">
+            <span class="material-symbols-outlined text-[64px] text-secondary mb-4 animate-bounce">construction</span>
+            <h3 class="font-display text-xl font-bold text-on-background">Currently Building...</h3>
+            <p id="progress-desc" class="text-sm text-text-secondary mt-2 max-w-md">
+              Loading progress...
+            </p>
+            <div class="w-full bg-surface-container-high rounded-full h-4 mt-6 border-2 border-surface-border overflow-hidden p-0.5">
+              <div id="progress-bar" class="bg-primary h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
+            </div>
+            <span id="progress-label" class="font-mono text-xs text-text-secondary mt-2 uppercase tracking-widest font-semibold">
+              Development - 0%
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MODELS HUB VIEW ==================== -->
+    <section id="models" class="view-section">
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col gap-lg">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md">
+          <div>
+            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-on-background mb-3">3D Models Hub</h1>
+            <p class="text-text-secondary text-base md:text-lg max-w-2xl font-medium">
+              A curated collection of functional, high-fidelity 3D assets ready for game development and rendering.
+            </p>
+          </div>
+          
+          <!-- Tags Filter Bar -->
+          <div id="models-filter-bar" class="flex flex-wrap gap-2 max-w-full md:max-w-md pt-2">
+            <!-- Dynamically populated tag chips -->
+          </div>
+        </div>
+        
+        <!-- Bento Grid Gallery -->
+        <div id="models-gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+          <!-- Dynamically populated model cards -->
+        </div>
+        
+        <!-- Load More / Footer status -->
+        <div id="models-load-more-container" class="flex justify-center mt-lg hidden">
+          <button id="models-load-more-btn" class="px-8 py-3 bg-surface text-on-background rounded-full border-3 border-secondary font-bold flex justify-center items-center gap-2 btn-press nintendo-shadow hover:bg-surface-container-high transition-colors uppercase tracking-wider text-sm">
+            Load More Assets
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GAMES VIEW ==================== -->
+    <section id="games" class="view-section">
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col gap-xl">
+        <div class="flex flex-col gap-sm items-start max-w-3xl">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-on-background">Playable Experiences.</h1>
+          <p class="text-text-secondary text-base md:text-lg font-medium">
+            A collection of interactive projects ranging from fast-paced prototypes to fully realized indie titles. Built to be fun, responsive, and tactile.
+          </p>
+        </div>
+        
+        <div id="games-list-grid" class="flex flex-col gap-gutter">
+          <!-- Dynamically populated game articles -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MISC PROJECTS HUB VIEW ==================== -->
+    <section id="misc" class="view-section">
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col gap-lg">
+        <div class="flex flex-col gap-sm items-start max-w-3xl">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-on-background">Misc Projects</h1>
+          <p class="text-text-secondary text-base md:text-lg font-medium">
+            Other engineering and software experiments, including embedded systems, and AI based projects.
+          </p>
+        </div>
+        
+        <!-- Grid list of misc projects (no pictures, clean cards) -->
+        <div id="misc-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+          <!-- Dynamically populated misc project cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT VIEW ==================== -->
+    <section id="contact" class="view-section">
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col gap-xl">
+        <div class="flex flex-col gap-base">
+          <div class="inline-flex items-center gap-2 bg-surface-container-low border-2 border-surface-border rounded-full px-4 py-2 w-max nintendo-shadow">
+            <div class="w-3 h-3 rounded-full bg-primary pulse-dot"></div>
+            <span class="font-mono text-xs font-bold text-on-background uppercase tracking-wider">Operator Online</span>
+          </div>
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-on-background mt-4">Direct Connection</h1>
+          <p class="text-text-secondary text-base md:text-lg max-w-2xl font-medium">
+            System channels are open. Send a query or initialize a connection request below. Response latency is currently optimal.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div class="lg:col-span-8 flex flex-col gap-gutter">
+            <section class="bg-surface card-tactile p-8">
+              <h2 class="font-display text-xl md:text-2xl font-bold text-on-background mb-6">Transmission Form</h2>
+              
+              <!-- Success Banner -->
+              <div id="form-success" class="hidden mb-6 p-4 bg-tertiary-container/20 border-2 border-tertiary text-on-background rounded-lg flex items-center gap-3 animate-fadeIn">
+                <span class="material-symbols-outlined text-tertiary">task_alt</span>
+                <div>
+                  <h4 class="font-bold">Transmission Dispatched</h4>
+                  <p class="text-xs text-text-secondary">Message payload loaded. Opening default mail client...</p>
+                </div>
+              </div>
+              
+              <form id="contact-form" class="flex flex-col gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                  <div class="flex flex-col gap-2">
+                    <label class="font-display font-bold text-sm text-on-background" for="sender-name">Sender ID</label>
+                    <input class="w-full bg-surface-container-low border-2 border-surface-border rounded-lg p-3 text-on-background focus:border-primary focus:outline-none transition-colors font-semibold" id="sender-name" placeholder="Enter your designation" type="text" required/>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="font-display font-bold text-sm text-on-background" for="sender-comms">Comms Link (Email)</label>
+                    <input class="w-full bg-surface-container-low border-2 border-surface-border rounded-lg p-3 text-on-background focus:border-primary focus:outline-none transition-colors font-semibold" id="sender-comms" placeholder="user@network.local" type="email" required/>
+                  </div>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                  <label class="font-display font-bold text-sm text-on-background" for="transmission-type">Query Type</label>
+                  <div class="relative">
+                    <select class="w-full bg-surface-container-low border-2 border-surface-border rounded-lg p-3 text-on-background focus:border-primary focus:outline-none transition-colors appearance-none cursor-pointer font-semibold pr-10" id="transmission-type">
+                      <option>Project Collaboration</option>
+                      <option>Asset Licensing</option>
+                      <option>General Inquiry</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary pointer-events-none">arrow_drop_down</span>
+                  </div>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                  <label class="font-display font-bold text-sm text-on-background" for="message-payload">Payload Data</label>
+                  <textarea class="w-full bg-surface-container-low border-2 border-surface-border rounded-lg p-3 text-on-background focus:border-primary focus:outline-none transition-colors resize-none font-semibold" id="message-payload" placeholder="Input transmission data here..." rows="5" required></textarea>
+                </div>
+                
+                <div class="pt-2">
+                  <button id="form-submit" class="w-full md:w-auto inline-flex justify-center items-center gap-2 bg-primary text-white border-[3px] border-primary-hover rounded-lg px-8 py-4 font-display font-bold uppercase tracking-wider btn-tactile" type="submit">
+                    <span class="material-symbols-outlined">send</span>
+                    Execute Transmission
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
+          
+          <div class="lg:col-span-4 flex flex-col gap-gutter">
+            <!-- Profile Info card -->
+            <div class="bg-surface card-tactile p-6 flex flex-col items-center text-center">
+              <div class="w-40 h-40 rounded-full border-4 border-surface-container-low overflow-hidden mb-6 shadow-inner bg-surface-container flex items-center justify-center">
+                <img id="profile-avatar" alt="Artist Profile Avatar" class="w-full h-full object-cover hidden"/>
+                <span id="profile-avatar-placeholder" class="material-symbols-outlined text-[96px] text-secondary">account_circle</span>
+              </div>
+              <h3 id="profile-name" class="font-display text-2xl font-extrabold text-on-background mb-1">Hazim</h3>
+              <p id="profile-title" class="font-mono text-xs font-semibold text-primary uppercase tracking-wider mb-4">System Architect</p>
+              <p id="profile-bio" class="text-sm text-text-secondary mb-6 leading-relaxed">
+                Digital artisan specializing in immersive environments and tactile interfaces. Operating out of Node 04.
+              </p>
+              <div class="w-full">
+                <a id="profile-email-btn" href="mailto:your-email@example.com" class="w-full bg-surface-container-low text-on-background border-2 border-surface-border rounded-lg py-3 px-4 font-bold transition-all flex items-center justify-center gap-2 hover:border-primary hover:text-primary hover:scale-[1.02] nintendo-shadow">
+                  <span class="material-symbols-outlined">mail</span>
+                  Direct Mail
+                </a>
+              </div>
+            </div>
+            
+            <!-- External Nodes (social) -->
+            <div class="bg-surface card-tactile p-6">
+              <h3 class="font-display font-bold text-sm text-on-background mb-4 uppercase tracking-wider border-b-2 border-surface-container-high pb-2">External Nodes</h3>
+              <div class="grid grid-cols-2 gap-3">
+                <a id="link-github" class="bg-surface-container-low border-2 border-surface-border rounded-lg p-3 flex flex-col items-center justify-center gap-2 hover:border-primary hover:scale-[1.03] transition-all nintendo-shadow text-on-background" href="#" target="_blank">
+                  <span class="material-symbols-outlined text-2xl">code</span>
+                  <span class="font-mono text-xs font-bold">GitHub</span>
+                </a>
+                <a id="link-itchio" class="bg-surface-container-low border-2 border-surface-border rounded-lg p-3 flex flex-col items-center justify-center gap-2 hover:border-primary hover:scale-[1.03] transition-all nintendo-shadow text-on-background" href="#" target="_blank">
+                  <span class="material-symbols-outlined text-2xl">sports_esports</span>
+                  <span class="font-mono text-xs font-bold">Itch.io</span>
+                </a>
+                <a id="link-linkedin" class="bg-surface-container-low border-2 border-surface-border rounded-lg p-3 flex flex-col items-center justify-center gap-2 hover:border-primary hover:scale-[1.03] transition-all nintendo-shadow text-on-background" href="#" target="_blank">
+                  <span class="material-symbols-outlined text-2xl">work</span>
+                  <span class="font-mono text-xs font-bold">LinkedIn</span>
+                </a>
+                <a id="link-playstore" class="bg-surface-container-low border-2 border-surface-border rounded-lg p-3 flex flex-col items-center justify-center gap-2 hover:border-primary hover:scale-[1.03] transition-all nintendo-shadow text-on-background" href="#" target="_blank">
+                  <span class="material-symbols-outlined text-2xl">shop</span>
+                  <span class="font-mono text-xs font-bold">Play Store</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Model Detail/Interactive Modal -->
+  <div id="renders-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 animate-fadeIn">
+    <div class="bg-surface border-2 border-surface-border rounded-xl max-w-4xl w-full p-6 relative nintendo-shadow flex flex-col max-h-[90vh]">
+      <button id="modal-close" class="absolute top-4 right-4 p-2 rounded-full bg-surface-container-high hover:bg-primary hover:text-white transition-colors flex items-center justify-center text-on-background" aria-label="Close Modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h3 id="modal-title" class="font-display text-headline-md font-bold mb-2 pr-10">Model Details</h3>
+      
+      <!-- Tabs header -->
+      <div id="modal-tabs" class="flex gap-2 border-b-2 border-surface-container-high pb-3 mb-4">
+        <button id="tab-3d" class="px-4 py-2 bg-primary text-white border-2 border-primary rounded-lg font-display text-xs font-bold transition-all nintendo-shadow btn-press">
+          <span class="material-symbols-outlined text-sm inline-block align-middle mr-1">3d_rotation</span> Interactive 3D
+        </button>
+        <button id="tab-renders" class="px-4 py-2 bg-surface-container text-text-secondary border-2 border-surface-border rounded-lg font-display text-xs font-bold transition-all hover:border-primary hover:text-primary">
+          <span class="material-symbols-outlined text-sm inline-block align-middle mr-1">image</span> Renders Gallery
+        </button>
+      </div>
+      
+      <!-- Interactive 3D Model Viewer Container -->
+      <div id="modal-3d-container" class="relative flex-grow flex items-center justify-center overflow-hidden min-h-[300px] h-[55vh]">
+        <!-- GLB/GLTF Viewer -->
+        <model-viewer id="modal-3d-viewer" src="" camera-controls auto-rotate shadow-intensity="1" class="w-full h-full bg-surface-container-low border-2 border-surface-border rounded-lg" ar ar-modes="webxr scene-viewer quick-look"></model-viewer>
+        <!-- FBX Canvas Viewer -->
+        <div id="modal-fbx-viewer" class="w-full h-full bg-surface-container-low border-2 border-surface-border rounded-lg hidden relative"></div>
+      </div>
+
+      <!-- Carousel Content Container -->
+      <div id="modal-renders-container" class="relative flex-grow flex items-center justify-center overflow-hidden min-h-[300px] h-[55vh] hidden">
+        <button id="modal-prev" class="absolute left-2 p-3 rounded-full bg-surface-container/80 hover:bg-primary hover:text-white transition-all text-on-background z-10 flex items-center justify-center">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        
+        <img id="modal-img" class="max-h-full max-w-full object-contain select-none" src="" alt="Render Preview"/>
+        
+        <button id="modal-next" class="absolute right-2 p-3 rounded-full bg-surface-container/80 hover:bg-primary hover:text-white transition-all text-on-background z-10 flex items-center justify-center">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+      
+      <!-- Carousel indicators/caption -->
+      <div id="modal-indicators" class="flex justify-center gap-2 mt-4 hidden">
+        <!-- Dot list dynamic -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container dark:bg-surface-container-high border-t-2 border-surface-container-high w-full mt-xl font-display text-sm transition-colors">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full px-margin py-8 max-w-[1440px] mx-auto gap-md">
+      <span id="footer-copyright" class="font-display font-semibold text-secondary">© 2026 ARTIST_CORE. All Rights Reserved. Built for Fun.</span>
+      <div class="flex gap-md">
+        <a id="footer-github" class="text-secondary hover:text-primary transition-colors font-semibold" href="#" target="_blank">GitHub</a>
+        <a id="footer-itchio" class="text-secondary hover:text-primary transition-colors font-semibold" href="#" target="_blank">Itch.io</a>
+        <a id="footer-linkedin" class="text-secondary hover:text-primary transition-colors font-semibold" href="#" target="_blank">LinkedIn</a>
+        <a id="footer-playstore" class="text-secondary hover:text-primary transition-colors font-semibold" href="#" target="_blank">Play Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-md border-t-2 border-surface-container-high py-2 px-6 flex justify-around items-center z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] transition-colors">
+    <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#home">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span>Home</span>
+    </a>
+    <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#models">
+      <span class="material-symbols-outlined text-[22px]">view_in_ar</span>
+      <span>Models</span>
+    </a>
+    <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#games">
+      <span class="material-symbols-outlined text-[22px]">sports_esports</span>
+      <span>Games</span>
+    </a>
+    <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#misc">
+      <span class="material-symbols-outlined text-[22px]">widgets</span>
+      <span>Misc</span>
+    </a>
+  </nav>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
