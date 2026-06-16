@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local server/compaction files
+.gemini/
+*.log
+
+# Large binaries, media, and docs (stored in GitHub Releases)
+*.blend
+*.glb
+*.apk
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.pdf
