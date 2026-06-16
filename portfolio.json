@@ -93,7 +93,7 @@
       "id": "swinging_rope",
       "title": "Swinging Rope 2D",
       "description": "Swinging rope is a game about a ball that constantly swings on a rope. Your mission is simple avoid any obstacles and climb as high as possible. You can collect power-ups and coins along the way. Power-ups will assist you in gaining score or coins. Coins can be used to buy different ball skins from the shop which have their own trails. Going faster between platforms will fill up a meter on the right which boosts you for a limited time. ",
-      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/swinging-rope/banner.webp",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/swinging-rope/banner.png",
       "icon": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/swinging-rope/icon.png",
       "tags": ["Unity", "2D"],
       "engine": "Unity",
