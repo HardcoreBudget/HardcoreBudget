@@ -107,6 +107,22 @@
       "assetStoreLink": "https://assetstore.unity.com/packages/2d/swinging-rope-2d-189679"
     }
   ],
+  "freelanceProjects": [
+    {
+      "id": "vr_chemistry_lab",
+      "title": "VR Chemistry Lab",
+      "description": "An immersive Unity VR chemistry lab where users learn about hydrocarbons.",
+      "tags": ["Unity", "VR"],
+      "demoVideo": "https://youtu.be/6MjTn0F07pU?si=E-_5gPyGhSBHvmVy"
+    },
+    {
+      "id": "vr_electricity_repair_workshop",
+      "title": "VR Electricity Repair Workshop",
+      "description": "A Unity VR training workshop for practicing electrical diagnosis and repair tasks step by step without real-world risk.",
+      "tags": ["Unity", "VR"],
+      "demoVideo": "https://youtu.be/OmE0C3CvGuM?si=9z2uA64TEhOkl2CI"
+    }
+  ],
   "miscProjects": [
     {
       "id": "PIC_programmer",

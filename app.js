@@ -33,6 +33,7 @@ async function fetchData() {
     renderTeasers(portfolioData);
     renderModels(portfolioData.models);
     renderGames(portfolioData.games);
+    renderFreelanceProjects(portfolioData.freelanceProjects);
     renderMiscProjects(portfolioData.miscProjects);
     renderProgressWidget(portfolioData.buildingProject);
     
@@ -674,6 +675,100 @@ function renderProgressWidget(progressData) {
   if (progressLabel) {
     progressLabel.textContent = progressData.progressLabel || `Development - ${progressData.progress || 0}%`;
   }
+}
+
+// Convert a YouTube watch / youtu.be / shorts / embed URL into an embeddable URL
+function getYouTubeEmbedUrl(url) {
+  if (!url) return '';
+  
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\.|^m\./, '');
+    let videoId = '';
+    
+    if (host === 'youtu.be') {
+      videoId = parsed.pathname.slice(1);
+    } else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+      if (parsed.pathname === '/watch') {
+        videoId = parsed.searchParams.get('v') || '';
+      } else {
+        const match = parsed.pathname.match(/^\/(?:embed|shorts|live)\/([^/?]+)/);
+        if (match) videoId = match[1];
+      }
+    }
+    
+    return videoId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}` : '';
+  } catch (e) {
+    return '';
+  }
+}
+
+// Render Freelance Projects (embedded demo videos only)
+function renderFreelanceProjects(freelanceProjects) {
+  if (!freelanceProjects) return;
+  
+  const container = document.getElementById('freelance-projects-grid');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  freelanceProjects.forEach(project => {
+    const card = document.createElement('article');
+    card.className = 'card-tactile p-6 flex flex-col gap-4 bg-surface';
+    
+    // Demo Video Frame (16:9)
+    const videoFrame = document.createElement('div');
+    videoFrame.className = 'w-full aspect-video bg-surface-container-high rounded-lg overflow-hidden relative border-2 border-surface-border';
+    
+    const embedUrl = getYouTubeEmbedUrl(project.demoVideo);
+    if (embedUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.src = embedUrl;
+      iframe.title = `${project.title} - Demo Video`;
+      iframe.className = 'w-full h-full block';
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+      videoFrame.appendChild(iframe);
+    } else {
+      videoFrame.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'text-text-secondary');
+      videoFrame.innerHTML = '<span class="material-symbols-outlined text-[48px]">videocam_off</span><span class="font-mono text-xs font-bold uppercase tracking-wider">Demo Coming Soon</span>';
+    }
+    card.appendChild(videoFrame);
+    
+    // Title & Description
+    const details = document.createElement('div');
+    details.className = 'flex flex-col gap-2 flex-grow';
+    
+    const title = document.createElement('h3');
+    title.className = 'font-display font-extrabold text-xl md:text-2xl text-on-background';
+    title.textContent = project.title;
+    details.appendChild(title);
+    
+    if (project.description) {
+      const desc = document.createElement('p');
+      desc.className = 'font-body text-sm text-text-secondary leading-relaxed';
+      desc.textContent = project.description;
+      details.appendChild(desc);
+    }
+    card.appendChild(details);
+    
+    // Tags list
+    if (project.tags && project.tags.length > 0) {
+      const tagsContainer = document.createElement('div');
+      tagsContainer.className = 'flex flex-wrap gap-1.5 mt-auto pt-2';
+      project.tags.forEach(tag => {
+        const chip = document.createElement('span');
+        chip.className = 'bg-surface-container-low text-on-background border border-surface-border px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold';
+        chip.textContent = tag;
+        tagsContainer.appendChild(chip);
+      });
+      card.appendChild(tagsContainer);
+    }
+    
+    container.appendChild(card);
+  });
 }
 
 // Render Misc Projects (no images, clean cards with material symbols icons)

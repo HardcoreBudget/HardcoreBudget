@@ -87,6 +87,7 @@
         <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#home">Home</a>
         <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#models">Models</a>
         <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#games">Games</a>
+        <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#freelance">Freelance</a>
         <a class="nav-link text-secondary dark:text-text-secondary font-semibold pb-1 hover:text-primary transition-colors border-b-2 border-transparent" href="#misc">Misc</a>
       </nav>
       
@@ -240,6 +241,23 @@
         
         <div id="games-list-grid" class="flex flex-col gap-gutter">
           <!-- Dynamically populated game articles -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FREELANCE VIEW ==================== -->
+    <section id="freelance" class="view-section">
+      <div class="max-w-[1440px] mx-auto px-margin py-xl flex flex-col gap-lg">
+        <div class="flex flex-col gap-sm items-start max-w-3xl">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-on-background">Freelance Work</h1>
+          <p class="text-text-secondary text-base md:text-lg font-medium">
+            Client projects delivered as a freelancer. Watch the demo videos to see them in action.
+          </p>
+        </div>
+        
+        <!-- Grid of freelance project cards with embedded demo videos -->
+        <div id="freelance-projects-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+          <!-- Dynamically populated freelance project cards -->
         </div>
       </div>
     </section>
@@ -451,6 +469,10 @@
     <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#games">
       <span class="material-symbols-outlined text-[22px]">sports_esports</span>
       <span>Games</span>
+    </a>
+    <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#freelance">
+      <span class="material-symbols-outlined text-[22px]">work</span>
+      <span>Freelance</span>
     </a>
     <a class="nav-link flex flex-col items-center gap-0.5 text-secondary hover:text-primary transition-colors text-xs font-semibold" href="#misc">
       <span class="material-symbols-outlined text-[22px]">widgets</span>
