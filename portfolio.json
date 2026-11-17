@@ -56,6 +56,23 @@
   ],
   "games": [
     {
+      "id": "pan_demonium",
+      "title": "PAN-DEMONIUM",
+      "description": "My entry for the Unity Game Jam 2026 (theme: Lucky Number). You play as a kitchen tool and fight your way through a messy kitchen while a chef sets off disasters around you: fires on the stove, oil on the floor, a flooded freezer. Luck decides what goes wrong; you decide how to fight back with special moves, an ultimate and a bingo-style draft between rounds. Almost everything in the kitchen can be broken. Survive by chance. Fight by choice.",
+      "image": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/pan-demonium/banner.png",
+      "icon": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/pan-demonium/icon.png",
+      "tags": ["Unity", "HD-2D", "Game Jam"],
+      "engine": "Unity",
+      "platform": "Web / Android / PC",
+      "status": "Game Jam Entry",
+      "role": "Game Developer",
+      "playStoreLink": "",
+      "apkFile": "https://github.com/HardcoreBudget/HardcoreBudget/releases/download/pan-demonium/pan-demonium.apk",
+      "webDemoLink": "https://hardcore-budget.itch.io/pan-demonium",
+      "trailerLink": "",
+      "assetStoreLink": ""
+    },
+    {
       "id": "mind_bind",
       "title": "Mind Bind",
       "description": "Mind bind is a puzzle-platformer game about helping a pirate and his sidekick get to the treasure. Both characters move and jump together. Your goal is to find a way to bind both characters while maneuvering through some difficult and mind bending platforming sections to reach a chest. Can you beat all 20 levels? ",
